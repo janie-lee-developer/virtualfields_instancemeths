@@ -1,21 +1,23 @@
-const express = require('express');
-const morgan = require('morgan');
-const path = require('path');
+const express = require("express");
+const morgan = require("morgan");
+const path = require("path");
 const app = express();
 
-if (process.env.NODE_ENV !== 'testing') app.use(morgan('dev'));
+if (process.env.NODE_ENV !== "testing") app.use(morgan("dev"));
 
 app.use(express.json());
 
-app.use('/api/places', require('./routes/places'));
-app.use('/api/*', (req, res) => {
-  res.status(404).send({ message: 'Not Found' });
+// app.use takes in two args
+// 1. "the url". this url is going to be the "PREFIX" of all the routes inside of ./routes/places
+app.use("/api/places", require("./routes/places"));
+app.use("/api/*", (req, res) => {
+  res.status(404).send({ message: "Not Found" });
 });
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.use('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'));
+app.use("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public/index.html"));
 });
 
 app.use((err, req, res, next) => {
