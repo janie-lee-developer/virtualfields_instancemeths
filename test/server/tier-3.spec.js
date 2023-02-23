@@ -61,7 +61,6 @@ describe("Tier 3: Virtual Fields, Route Parameters, DELETE Routes", () => {
           });
           expect(nyc.nickname).to.equal("NYC");
         });
-
         it("nickname is virtual (it doesn't appear as a column in the database)", async () => {
           const nyc = await Place.create({
             place_name: "new york city",
@@ -88,10 +87,7 @@ describe("Tier 3: Virtual Fields, Route Parameters, DELETE Routes", () => {
         const response = await app.delete(`/api/places/${nyc.id}`);
         expect(response.status).to.equal(204);
         nyc = await Place.findByPk(nyc.id);
-        expect(
-          nyc,
-          "new york city should have been deleted, but was not"
-        ).to.equal(null);
+        expect(nyc, "new york city should have been deleted, but was not").to.equal(null);
       });
 
       it("responds with 404 if the place does not exist", async () => {

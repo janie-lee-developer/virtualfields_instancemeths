@@ -1,5 +1,8 @@
 const app = require("./app");
 const port = process.env.PORT || 3000;
-const db = require("./db");
+const { seed, db } = require("./db/index");
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, async () => {
+  await seed();
+  console.log(`listening on port ${port}`);
+});

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start:dev": "nodemon server/index.js",
     "test": "mocha --recursive --exit",
     "test-dev": "NODE_ENV='testing' DATABASE_URL='postgres://localhost/pillars_test' nodemon --exec mocha test/server/*.spec.js",
     "test-windows": "set NODE_ENV=testing&& set DATABASE_URL=postgres://localhost:5432/pillars_practice_test&& npm run test -- --watch"
